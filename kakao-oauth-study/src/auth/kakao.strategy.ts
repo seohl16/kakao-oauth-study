@@ -15,12 +15,9 @@ export class StrategyKakao extends PassportStrategy(Strategy, 'kakao') {
 	}
 
 	async validate(accessToken: string, refreshToken: string, profile, done) {
-		const data = await (this.authService.tokenValidation(accessToken));
+		const user: AuthKakaoDto = await (this.authService.getUserMe(accessToken));
+		console.log(user);
 		console.log("accesstoken", accessToken);
-		const payload: AuthKakaoDto = {
-			name: profile._json.kakao_account.profile.nickname,
-			kakaoid: profile._json.id,
-		};
-		done(null, payload);
+		done(null, user);
 	}
 }
