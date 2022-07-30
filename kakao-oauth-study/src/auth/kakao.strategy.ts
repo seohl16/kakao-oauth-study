@@ -3,10 +3,11 @@ import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-kakao";
 import * as config from 'config';
 import { AuthKakaoDto } from "./dto/auth.kakao-dto";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class StrategyKakao extends PassportStrategy(Strategy, 'kakao') {
-	constructor() {
+	constructor(public readonly authService: AuthService) {
 		super({
 			clientID: config.get('kakao.clientId'),
 			callbackURL: config.get('kakao.callbackURL'),
@@ -14,9 +15,8 @@ export class StrategyKakao extends PassportStrategy(Strategy, 'kakao') {
 	}
 
 	async validate(accessToken: string, refreshToken: string, profile, done) {
-		console.log(accessToken);
-		const profilejson = profile._json
-		const kakao_account = profilejson.kakao_account;
+		const data = await (this.authService.tokenValidation(accessToken));
+		console.log("accesstoken", accessToken);
 		const payload: AuthKakaoDto = {
 			name: profile._json.kakao_account.profile.nickname,
 			kakaoid: profile._json.id,
