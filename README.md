@@ -11,3 +11,6 @@ Using Kakao OAuth with Nest.js
 1. 로그인 및 동의하고 나면 AuthGuard에 따라 strategy의 validate함수 실행 
 2. payload에 정보를 담고 callback 함수인 kakaoLoginCallback함수를 실행 
 3. kakaoLoginCallback()에 있는 req.user, req.query 등 console.log 내용을 프린트하고 finish
+
+
+## 구현 과정은 issue #1 을 참조 
