@@ -13,4 +13,4 @@ Using Kakao OAuth with Nest.js
 3. kakaoLoginCallback()에 있는 req.user, req.query 등 console.log 내용을 프린트하고 finish
 
 
-## 구현 과정은 issue #1 을 참조 
+## 구현 과정은 [issue #1](https://github.com/seohl16/kakao-oauth-study/issues/1#issue-1322904062) 을 참조 
